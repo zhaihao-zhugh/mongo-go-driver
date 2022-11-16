@@ -18,7 +18,7 @@ import (
 )
 
 const (
-	timeFormatString = "2006-01-02T15:04:05.999Z07:00"
+	timeFormatString = "2006-01-02 15:04:05"
 )
 
 // TimeCodec is the Codec used for time.Time values.
