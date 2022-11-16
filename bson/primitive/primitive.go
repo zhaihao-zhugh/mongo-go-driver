@@ -15,6 +15,8 @@ import (
 	"time"
 )
 
+const timeFormart = "2006-01-02 15:04:05"
+
 // Binary represents a BSON binary value.
 type Binary struct {
 	Subtype byte
@@ -45,7 +47,12 @@ var _ json.Unmarshaler = (*DateTime)(nil)
 
 // MarshalJSON marshal to time type.
 func (d DateTime) MarshalJSON() ([]byte, error) {
-	return json.Marshal(d.Time())
+	b := make([]byte, 0, len(timeFormart)+2)
+	b = append(b, '"')
+	b = d.Time().AppendFormat(b, timeFormart)
+	b = append(b, '"')
+	return b, nil
+	// return json.Marshal(d.Time())
 }
 
 // UnmarshalJSON creates a primitive.DateTime from a JSON string.
